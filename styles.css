@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    background-color: black;
+    overflow: hidden;
+}
+
+.center{
+    text-align: center;
+}
+
+.circle{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: red;
+}
+.circle:hover{
+    background-color: darkred;
+}
+
+.score{
+    color: white;
+    font-size: xx-large;
+    font-family: Arial;
+}
+
+.timer{
+    color: white;
+    font-size: xx-large;
+    font-family: Arial;
+}
+
+.high_score{
+    color: white;
+    font-size: xx-large;
+    font-family: Arial;
+}
+
+.btn{
+    width: 100px;
+    height: 40px;
+    margin: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius:10%;
+    font-weight: bolder;
+    font-family: Arial;
+    font-size: medium;
+}
+.btn:hover{
+    background-color: lightcoral;
+}
