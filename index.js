@@ -58,7 +58,7 @@ function updateClock(){
     if (score_count > 0){
         console.log(score_count);
         timer_count -= 1;
-        timer.innerHTML = "timer: " + timer_count;
+        timer.innerHTML = "timer: " + timer_count + ":00";
         if (timer_count == 0){
             console.log(10);
             high_scores.unshift(score_count);

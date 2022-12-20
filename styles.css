@@ -9,6 +9,8 @@ body{
 }
 
 .circle{
+    margin-left: 50%;
+    margin-top: 25%;
     width: 45px;
     height: 45px;
     border-radius: 50%;
