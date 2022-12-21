@@ -6,7 +6,7 @@ backlground = document.getElementById("lol");
 let score_count = 0;
 let audio = new Audio('click.wav');
 let fail_audio = new Audio('fail.wav');
-let timer_count = 10;
+let timer_count = 100;
 let high_scores = [0];
 let timer_on = false;
 
@@ -58,7 +58,7 @@ function easy(){
 
 function updateClock(){
     backlground.style.backgroundColor = "black";
-    setTimeout(updateClock,1000);
+    setTimeout(updateClock,100);
     if (score_count > 0){
         if (score_count > bubbleSort(high_scores)){
             score.style.color = "#39ff14";
@@ -67,17 +67,18 @@ function updateClock(){
         }
         console.log(score_count);
         timer_count -= 1;
-        timer.innerHTML = "timer: " + timer_count + ":00";
+        timer.innerHTML = "timer: " + Math.floor(timer_count/10) + ":" + timer_count%10+ "0";
         if (timer_count == 0){
             fail_audio.play();
             score.style.color = "white";
             console.log(10);
             high_scores.unshift(score_count);
-            backlground.style.backgroundColor = "#FF10F0";
+            //backlground.style.backgroundColor = "red";
+            backlground.style.backgroundColor = "#e52165";
             h_score.innerHTML = "High Score: " + bubbleSort(high_scores);
             score_count = 0;
             score.innerHTML = "Score: " + score_count;
-            timer_count = 10;
+            timer_count = 100;
         }
     }
 
