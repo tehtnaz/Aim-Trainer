@@ -2,6 +2,7 @@ circle = document.getElementById("circle");
 score = document.getElementById("score");
 timer = document.getElementById("timer");
 h_score = document.getElementById("highest_score");
+backlground = document.getElementById("lol");
 let score_count = 0;
 let audio = new Audio('click.wav');
 let fail_audio = new Audio('fail.wav');
@@ -26,7 +27,7 @@ function bubbleSort(arr){
 
 function clicked(){
     audio.play();
-    circle.style.backgroundColor = "red";
+    backlground.style.backgroundColor = "black";
     score_count += 1;
     score.innerHTML = "score: " + score_count;
     RandomXpos = Math.random() * (window.innerWidth-100);
@@ -56,17 +57,23 @@ function easy(){
 }
 
 function updateClock(){
+    backlground.style.backgroundColor = "black";
     setTimeout(updateClock,1000);
     if (score_count > 0){
+        if (score_count > bubbleSort(high_scores)){
+            score.style.color = "#39ff14";
+        }else{
+            score.style.color = "white";
+        }
         console.log(score_count);
         timer_count -= 1;
         timer.innerHTML = "timer: " + timer_count + ":00";
         if (timer_count == 0){
-            circle.style.backgroundColor = "blue";
             fail_audio.play();
+            score.style.color = "white";
             console.log(10);
             high_scores.unshift(score_count);
-    
+            backlground.style.backgroundColor = "#FF10F0";
             h_score.innerHTML = "High Score: " + bubbleSort(high_scores);
             score_count = 0;
             score.innerHTML = "Score: " + score_count;
