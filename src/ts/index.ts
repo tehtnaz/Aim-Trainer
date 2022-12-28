@@ -1,41 +1,43 @@
-circle = document.getElementById("circle");
-score = document.getElementById("score");
-timer = document.getElementById("timer");
-h_score = document.getElementById("highest_score");
-backlground = document.getElementById("lol");
+import "/src/css/styles.css"
+
+const circle = document.getElementById("circle")!;
+const score = document.getElementById("score")!;
+const timer = document.getElementById("timer")!;
+const h_score = document.getElementById("highest_score")!;
+const backlground = document.getElementById("lol")!;
 let score_count = 0;
 let audio = new Audio('click.wav');
 let fail_audio = new Audio('fail.wav');
-let timer_count = 100;
-let high_scores = [0];
-let timer_on = false;
+const high_scores = [0];
+let time = Date.now();
 
-function bubbleSort(arr){
+//bind buttons
+document.getElementById("hard_btn")!.onclick = hard;
+document.getElementById("medium_btn")!.onclick = medium;
+document.getElementById("easy_btn")!.onclick = easy;
+circle.onclick = clicked;
 
-    for(let i = 0; i < arr.length; i++){
-
-        for(let j = 0; j < arr.length - i - 1; j++){
-
-            if(arr[j + 1] < arr[j]){
-
-                [arr[j + 1],arr[j]] = [arr[j],arr[j + 1]]
-            }
-        }
-    };
-    return arr[arr.length - 1];
-};
+function findGreatest(arr: number[]){
+    let largestNum = 0;
+    for(const item of arr){
+        if(item > largestNum) largestNum = item;
+    }
+    return largestNum;
+}
 
 function clicked(){
+    if(score_count === 0){
+        time = Date.now();
+    }
     audio.play();
     backlground.style.backgroundColor = "black";
     score_count += 1;
     score.innerHTML = "score: " + score_count;
-    RandomXpos = Math.random() * (window.innerWidth-100);
-    RandomYpos = Math.random() * (window.innerHeight - 300);
+    const RandomXpos = Math.random() * (window.innerWidth-100);
+    const RandomYpos = Math.random() * (window.innerHeight - 300);
 
-    circle.style.marginLeft = RandomXpos + "px";
-    circle.style.marginTop = RandomYpos + "px";
-
+    circle.style.marginLeft = `${RandomXpos}px`;
+    circle.style.marginTop = `${RandomYpos}px`;
 }
 
 function hard(){
@@ -58,30 +60,28 @@ function easy(){
 
 function updateClock(){
     backlground.style.backgroundColor = "black";
-    setTimeout(updateClock,100);
     if (score_count > 0){
-        if (score_count > bubbleSort(high_scores)){
+        if (score_count > findGreatest(high_scores)){
             score.style.color = "#39ff14";
         }else{
             score.style.color = "white";
         }
         console.log(score_count);
-        timer_count -= 1;
-        timer.innerHTML = "timer: " + Math.floor(timer_count/10) + ":" + timer_count%10+ "0";
-        if (timer_count == 0){
+        timer.innerHTML = `Timer: ${Math.floor((time - Date.now()) / 1000) + 10}.${Math.floor((Date.now() - time)/10) % 100}`;
+        if (time + 10000 < Date.now()){
             fail_audio.play();
             score.style.color = "white";
-            console.log(10);
             high_scores.unshift(score_count);
-            //backlground.style.backgroundColor = "red";
             backlground.style.backgroundColor = "#e52165";
-            h_score.innerHTML = "High Score: " + bubbleSort(high_scores);
+            timer.innerHTML = `Timer: 0.00`;
+            h_score.innerHTML = "High Score: " + findGreatest(high_scores);
             score_count = 0;
             score.innerHTML = "Score: " + score_count;
-            timer_count = 100;
+            setTimeout(updateClock, 100);
+            return;
         }
     }
-
+    setTimeout(updateClock,10);
 }
 
 updateClock();

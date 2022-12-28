@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/src/css/styles.css">
     <title>Aim Trainer</title>
 </head>
 <body id="lol">
+    <script type="module" src="src/ts/index.ts"></script>
     <div class="center">
-        <button class="btn" onclick="hard()">HARD</button>
-        <button class="btn" onclick="medium()">MEDIUM</button>
-        <button class="btn" onclick="easy()">EASY</button>
+        <button id="hard_btn" class="btn">HARD</button>
+        <button id="medium_btn" class="btn">MEDIUM</button>
+        <button id="easy_btn" class="btn">EASY</button>
         <div id="highest_score" class="high_score">High Score: 0</div>
         <div id="timer" class="timer">Time: 0:00</div>
         <div id="score" class="score">score: 0</div>
@@ -19,8 +20,6 @@
     
     
 
-    <button onclick="clicked()" id="circle" class="circle"></button>
-
-    <script src="index.js"></script>
+    <button id="circle" class="circle"></button>
 </body>
 </html>
